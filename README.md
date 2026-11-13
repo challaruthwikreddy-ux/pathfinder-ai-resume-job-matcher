@@ -42,9 +42,10 @@ Open <http://localhost:8000>. Compose keeps the SQLite database in a named volum
 
 ## Publish a public demo with Render
 
-1. Put this project folder in a **new public GitHub repository**. Do not upload `.venv`, `.env`, `data/matcher.db`, or any resume files; the included `.gitignore` excludes them.
-2. In Render, create a **Blueprint** from that repository and deploy the included `render.yaml`.
-3. Render builds the Docker image and gives the site a public `onrender.com` address. Share that address so anyone can open the site.
+1. Connect your GitHub account to Render and allow access to this repository. The source repository can stay private.
+2. In Render, create a **Web Service** from the repository's `main` branch. Keep the Docker runtime and repository root directory, then choose the **Free** compute plan.
+3. Set `APP_DB_PATH` to `/tmp/pathfinder.db` and `APP_ENV` to `public` under Environment Variables. The `render.yaml` file lists the same settings for Blueprint deployments.
+4. Deploy the service. Render builds the Docker image and gives the site a public `onrender.com` address. Share that address so anyone can open the site.
 
 ### Free demo limits and resume privacy
 

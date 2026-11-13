@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101a2c" />
+    <title>Pathfinder — Resume & Job Matcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css?v=1.2.0" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="Pathfinder home" data-page-link="dashboard">
+          <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 27.8 10v12L16 28.5 4.2 22V10L16 3.5Z"/><path d="m11 19.5 3.1-7 2.1 4 4.7-5"/><circle cx="21" cy="11.5" r="1.2"/></svg></span>
+          <span><strong>pathfinder</strong><small>CAREER INTELLIGENCE</small></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span>Overview</button>
+          <button class="nav-item" data-page="resumes"><span class="nav-icon">▤</span>Resumes<span id="resume-nav-count" class="nav-count">0</span></button>
+          <button class="nav-item" data-page="jobs"><span class="nav-icon">▣</span>Job board</button>
+          <button class="nav-item" data-page="matches"><span class="nav-icon">⌁</span>Matches</button>
+          <button class="nav-item" data-page="database"><span class="nav-icon">▦</span>Data</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="help-card"><div class="help-icon">✦</div><strong>Make your next move.</strong><p>Add a resume to uncover roles picked for your skills.</p><button class="help-link" data-page-link="resumes">Explore resumes <span>↗</span></button></div>
+          <div class="sidebar-user"><div class="avatar avatar-lilac owner-avatar">CRR</div><div class="user-meta"><strong class="owner-name">CHALLA RUTHWIK REDDY</strong><span>Workspace owner</span></div><button class="more-button" id="workspace-menu-button" aria-label="Workspace options" title="Workspace options">···</button></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong id="breadcrumb-page">Overview</strong></div><div class="topbar-actions"><span class="live-status" id="server-status"><i></i><span id="server-status-text">Checking server…</span></span><button class="icon-button" id="notifications-button" aria-label="Recent activity" title="Recent activity">♧<b></b></button><button class="avatar avatar-lilac top-avatar profile-trigger" id="profile-button" type="button" aria-label="Edit workspace profile" title="Edit workspace profile">CRR</button></div></header>
+
+        <section class="page active" id="page-dashboard">
+          <div class="page-heading"><div><div class="eyebrow">FRIDAY, NOVEMBER 13, 2026 <span class="sparkle">✦</span></div><h1>Your career, in focus.</h1><p class="subheading">A clearer path from your experience to your next opportunity.</p></div><button class="button button-primary" data-page-link="resumes"><span>＋</span> Add a resume</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Resumes analyzed</span><span class="stat-symbol indigo">▤</span></div><div class="stat-number" id="stat-resumes">0</div><div class="stat-foot"><span class="stat-note">Profiles in your workspace</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Roles to explore</span><span class="stat-symbol mint">▣</span></div><div class="stat-number" id="stat-jobs">0</div><div class="stat-foot"><span class="stat-note">Across the job board</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Potential matches</span><span class="stat-symbol amber">⌁</span></div><div class="stat-number" id="stat-matches">0</div><div class="stat-foot"><span class="stat-note">Resume-to-role comparisons</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Average fit score</span><span class="stat-symbol rose">◉</span></div><div class="stat-number"><span id="stat-average">0</span><small>%</small></div><div class="stat-foot"><span class="stat-note">Across analyzed matches</span></div></article>
+          </div>
+          <div class="dashboard-grid">
+            <section class="panel upload-panel"><div class="panel-heading"><div><span class="section-kicker">GET STARTED</span><h2>Find your next fit</h2></div><span class="step-pill"><i></i> 3 simple steps</span></div><p class="panel-description">Upload a resume and Pathfinder will map your skills to opportunities that make sense for you.</p>
+              <div class="steps"><div class="step done"><span class="step-num">1</span><div><strong>Upload your resume</strong><small>PDF, DOCX, or plain text</small></div></div><div class="step-line"></div><div class="step"><span class="step-num">2</span><div><strong>Review your skills</strong><small>We’ll identify your strengths</small></div></div><div class="step-line"></div><div class="step"><span class="step-num">3</span><div><strong>Explore your matches</strong><small>See roles ranked by fit</small></div></div></div>
+              <label class="dropzone" id="dropzone" for="resume-file"><span class="upload-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4.5 14v4.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V14"/></svg></span><strong>Drop your resume here, or <em>browse files</em></strong><span>Up to 10 MB · PDF, DOCX, TXT</span></label>
+              <div class="privacy-note" id="privacy-note"><span>♧</span><span id="privacy-copy">Uploads are processed in memory. Extracted profile fields and match results are stored in the local SQLite database.</span></div>
+            </section>
+            <section class="panel trends-panel"><div class="panel-heading"><div><span class="section-kicker">MARKET PULSE</span><h2>Skills in demand</h2></div><span class="sparkle-icon">✳</span></div><p class="panel-description">Skills appearing most often across open roles.</p><div class="trend-list" id="demand-skills"><div class="empty-inline">Loading skills…</div></div><button class="text-link" data-page-link="jobs">Explore the job board <span>→</span></button></section>
+          </div>
+          <div class="bottom-grid">
+            <section class="panel table-panel"><div class="panel-heading"><div><span class="section-kicker">RECENT ACTIVITY</span><h2>Recently added resumes</h2></div><button class="text-link" data-page-link="resumes">View all <span>→</span></button></div><div id="recent-resumes" class="recent-list"><div class="empty-state small">No resumes yet. Upload one to get started.</div></div></section>
+            <section class="panel next-panel"><div class="next-icon">✧</div><span class="section-kicker">YOUR NEXT STEP</span><h2>Small steps add up.</h2><p>Start with a resume. We’ll take it from there and show you where your skills can go.</p><button class="button button-secondary" data-page-link="resumes">Add your first resume <span>→</span></button><div class="next-decoration decor-one"></div><div class="next-decoration decor-two"></div></section>
+          </div>
+          <footer class="page-footer"><span>© 2026 Pathfinder</span><span>Built for better career decisions <b>✦</b></span><span><a href="/docs" target="_blank">API docs</a><span class="footer-dot">·</span><a href="/api/health" target="_blank">System status</a></span></footer>
+        </section>
+
+        <section class="page" id="page-resumes">
+          <div class="page-heading"><div><div class="eyebrow">YOUR TALENT LIBRARY</div><h1>Resume profiles</h1><p class="subheading">Keep your experience in one place and see what it can unlock.</p></div><label class="button button-primary" for="resume-file"><span>＋</span> Upload resume</label></div>
+          <div class="resumes-toolbar"><div class="toolbar-info"><strong id="resume-total-label">0 profiles</strong><span>PDF, DOCX, and TXT supported</span></div><div class="search-wrap"><span>⌕</span><input id="resume-search" type="search" placeholder="Search resumes" /></div></div>
+          <div id="resume-grid" class="resume-grid"><div class="empty-state">Your resume library is empty. Upload a resume to see skills and job matches.</div></div>
+        </section>
+
+        <section class="page" id="page-jobs">
+          <div class="page-heading"><div><div class="eyebrow">OPPORTUNITY BOARD</div><h1>Roles worth a look.</h1><p class="subheading">Explore roles and see the skills employers are looking for.</p></div><button class="button button-primary" id="open-job-modal"><span>＋</span> Add a role</button></div>
+          <div class="jobs-toolbar"><div class="search-wrap jobs-search"><span>⌕</span><input id="job-search" type="search" placeholder="Search title, company, or skill" /></div><div class="search-wrap location-search"><span>⌖</span><input id="job-location" type="search" placeholder="Location" /></div><span id="job-count-label" class="results-count"></span></div>
+          <div id="job-grid" class="job-grid"><div class="empty-state">Loading jobs…</div></div>
+        </section>
+
+        <section class="page" id="page-matches">
+          <div class="page-heading"><div><div class="eyebrow">PERSONALIZED FOR YOU</div><h1>Your strongest matches.</h1><p class="subheading">A useful starting point, based on the skills in your resumes.</p></div><div class="match-filters"><div class="select-wrap"><label for="match-resume-select">MATCHING RESUME</label><select id="match-resume-select"><option value="">All resumes</option></select></div><div class="select-wrap"><label for="match-job-select">ROLE</label><select id="match-job-select"><option value="">All roles</option></select></div></div></div>
+          <div class="match-summary" id="match-summary"><span class="match-summary-mark">✦</span><div><strong>Match scores are a guide.</strong><span>Review each role’s requirements and decide what feels right for you.</span></div></div>
+          <div class="match-toolbar"><strong id="match-count-label">0 matches</strong><span>Sorted by fit score</span></div>
+          <div id="match-list" class="match-list"><div class="empty-state">Upload a resume to generate your first matches.</div></div>
+        </section>
+
+        <section class="page" id="page-database">
+          <div class="page-heading"><div><div class="eyebrow">DATABASE ACCESS</div><h1>Your workspace data.</h1><p class="subheading">Browse and export records stored for this browser workspace.</p></div><button class="button button-secondary" id="refresh-database"><span>↻</span> Refresh data</button></div>
+          <div class="database-summary"><article><span>Database</span><strong id="database-engine">SQLite</strong></article><article><span>Resume records</span><strong id="database-resume-count">0</strong></article><article><span>Active roles</span><strong id="database-job-count">0</strong></article><article><span>Match records</span><strong id="database-match-count">0</strong></article></div>
+          <section class="panel database-panel"><div class="database-toolbar"><div><span class="section-kicker">TABLE BROWSER</span><h2 id="database-table-title">Resumes</h2></div><div class="database-controls"><div class="search-wrap"><span>⌕</span><input id="database-search" type="search" placeholder="Search records" /></div><select id="database-resource" aria-label="Database table"><option value="resumes">Resumes</option><option value="jobs">Jobs</option><option value="matches">Matches</option></select><button class="button button-primary" id="export-database"><span>↓</span> Export CSV</button></div></div><div class="database-table-wrap"><table class="database-table"><thead id="database-head"></thead><tbody id="database-body"><tr><td class="database-empty">Loading database records…</td></tr></tbody></table></div><div class="database-footer"><span id="database-row-count">0 records</span><div><span>Database:</span><code id="database-path">Loading…</code><button class="text-link" id="copy-database-path">Copy info</button></div></div></section>
+          <div class="workspace-data-actions"><button type="button" class="button button-quiet" id="clear-workspace">Delete this browser workspace’s data</button></div>
+          <p class="database-note" id="database-note">Only extracted profile fields are stored; the uploaded file and extracted full text are not retained. Resume and match records stay in the local SQLite database. Exports omit source resume files.</p>
+        </section>
+      </main>
+    </div>
+    <input id="resume-file" type="file" accept=".pdf,.docx,.txt" hidden />
+    <div id="toast" class="toast" role="status"></div>
+    <div id="modal-backdrop" class="modal-backdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-heading"><div><span class="section-kicker">JOB BOARD</span><h2 id="modal-title">Add a role</h2></div><button class="modal-close" id="close-job-modal" aria-label="Close">×</button></div><form id="job-form"><div class="form-grid"><label>Company<input name="company" required placeholder="e.g. Northstar Labs" /></label><label>Role title<input name="title" required placeholder="e.g. Frontend Developer" /></label><label>Location<input name="location" required placeholder="Remote · India" /></label><label>Employment type<select name="employment_type"><option>Full-time</option><option>Contract</option><option>Internship</option><option>Part-time</option></select></label><label>Salary range<input name="salary_range" placeholder="Not listed" /></label><label>Level<select name="level"><option>Entry level</option><option>Mid level</option><option>Senior level</option><option>Any level</option></select></label><label>Experience (years)<input name="min_experience" type="number" min="0" value="0" /></label><label class="full-field">Description<textarea name="description" required rows="3" placeholder="What will this person do?"></textarea></label><label class="full-field">Required skills <small>(comma separated)</small><input name="required_skills" required placeholder="Python, SQL, Communication" /></label><label class="full-field">Preferred skills <small>(optional)</small><input name="preferred_skills" placeholder="Docker, AWS" /></label></div><div class="modal-actions"><button type="button" class="button button-quiet" id="cancel-job-modal">Cancel</button><button class="button button-primary" type="submit">Save role <span>→</span></button></div></form></div></div>
+    <div id="action-modal-backdrop" class="modal-backdrop" hidden><section class="modal action-modal" role="dialog" aria-modal="true" aria-labelledby="action-modal-title"><div class="modal-heading"><div><span class="section-kicker" id="action-modal-kicker">WORKSPACE</span><h2 id="action-modal-title">Details</h2></div><button class="modal-close" id="action-modal-close" aria-label="Close">×</button></div><div id="action-modal-body"></div><div class="modal-actions"><button type="button" class="button button-quiet" id="action-modal-done">Close</button></div></section></div>
+    <script src="/static/app.js?v=1.2.0" defer></script>
+  </body>
+</html>
+

@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: pathfinder-career-matcher
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_DB_PATH
+        value: /tmp/pathfinder.db
+      - key: APP_ENV
+        value: public
+
